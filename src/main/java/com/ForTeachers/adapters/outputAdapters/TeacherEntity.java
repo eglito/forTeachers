@@ -1,5 +1,6 @@
 package com.ForTeachers.adapters.outputAdapters;
 
+import com.ForTeachers.dtos.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,5 @@
 package com.ForTeachers.adapters.outputAdapters;
 
-import com.ForTeachers.enums.StudentType;
 import com.ForTeachers.enums.UserType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
