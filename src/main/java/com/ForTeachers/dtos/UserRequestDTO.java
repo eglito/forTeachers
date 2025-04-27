@@ -1,9 +1,8 @@
 package com.ForTeachers.dtos;
 
 import com.ForTeachers.enums.UserType;
-import org.apache.catalina.User;
 
-public record CreateUserDTO(
+public record UserRequestDTO(
         String firstName,
         String lastName,
         String email,
