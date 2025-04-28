@@ -1,6 +1,5 @@
 package com.ForTeachers.adapters.outputAdapters;
 
-import com.ForTeachers.dtos.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,11 +17,14 @@ import java.util.List;
 public class TeacherEntity extends UserEntity{
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<StudentEntity> listStudents;
+    private List<StudentEntity> studentsList;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DisciplineEntity> listDisciplines;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ClassroomEntity> listClassroom;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LessonEntity> listLesson;
 
