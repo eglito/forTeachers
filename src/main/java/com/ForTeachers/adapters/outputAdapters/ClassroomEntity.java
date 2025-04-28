@@ -19,14 +19,23 @@ public class ClassroomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 50)
     private String name;
+
     @OneToOne
     private DisciplineEntity discipline;
-    @ManyToOne
+
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
-    @ManyToMany (mappedBy = "classroomList")
-    private Set<StudentEntity> studentList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "classroom_students",
+            joinColumns = @JoinColumn(name = "classroom_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private Set<StudentEntity> studentsList;
 
 }
