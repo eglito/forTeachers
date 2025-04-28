@@ -19,14 +19,19 @@ public abstract class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 150)
     private String firstName;
+
     @Column(length = 150)
     private String lastName;
+
     @Column(unique = true)
     private String email;
+
     @Column(name = "user_type")
     private UserType userType;
+
     private String password;
 
 }
