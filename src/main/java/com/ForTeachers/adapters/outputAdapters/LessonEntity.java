@@ -19,15 +19,23 @@ public class LessonEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 50)
     private String classTitle;
     private String activity;
-    @ManyToOne
+
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
+
     @ManyToOne
     @JoinColumn(name = "discipline_id")
     private DisciplineEntity discipline;
-    @ManyToMany(mappedBy = "lessonList")
+
+    @ManyToMany
+    @JoinTable( name = "lesson_students",
+            joinColumns = @JoinColumn(name = "lesson_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
     private Set<StudentEntity> studentsList;
 }
