@@ -19,26 +19,14 @@ public class StudentEntity extends UserEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
-    @ManyToMany
-    @JoinTable(
-            name = "student_disciplines",
-            joinColumns =  @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "discipline_id")
-    )
+
+    @ManyToMany(mappedBy = "studentsList")
     private Set<DisciplineEntity> disciplineList;
-    @ManyToMany
-    @JoinTable(
-            name = "student_classrooms",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "classroom_id")
-    )
+
+    @ManyToMany(mappedBy = "studentsList")
     private Set<ClassroomEntity> classroomList;
-    @ManyToMany
-    @JoinTable(
-            name = "student_lessons",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "lesson_id")
-    )
+
+    @ManyToMany(mappedBy = "studentsList")
     private Set<LessonEntity> lessonList;
 
 }
