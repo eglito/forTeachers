@@ -19,13 +19,25 @@ public class DisciplineEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 50)
     private String name;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discipline_id")
     private TeacherEntity teacher;
+
+    @OneToOne
+    private ClassroomEntity classroom;
+
     @OneToMany (mappedBy = "discipline", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<LessonEntity> listLesson;
-    @ManyToMany(mappedBy = "disciplineList")
+    private Set<LessonEntity> lessonList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "discipline_student",
+            joinColumns = @JoinColumn(name = "discipline_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
     private Set<StudentEntity> studentsList;
 }
