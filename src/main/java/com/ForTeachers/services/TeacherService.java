@@ -1,19 +1,20 @@
 package com.ForTeachers.services;
 
+import com.ForTeachers.mapper.UserMapper;
+import com.ForTeachers.persistence.TeacherPersistence;
 import com.ForTeachers.adapters.outputAdapters.TeacherEntity;
 import com.ForTeachers.dtos.EmailResponseDTO;
-import com.ForTeachers.dtos.UserResponseDTO;
-import com.ForTeachers.dtos.UserRequestDTO;
+import com.ForTeachers.dtos.userDto.UserResponseDTO;
+import com.ForTeachers.dtos.userDto.UserRequestDTO;
 import com.ForTeachers.enums.UserType;
 import com.ForTeachers.repositorios.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TeacherService {
+public class TeacherService implements TeacherPersistence {
 
     private final TeacherRepository teacherRepository;
 
@@ -22,7 +23,7 @@ public class TeacherService {
         this.teacherRepository = teacherRepository;
     }
 
-    public ResponseEntity<UserResponseDTO> creatTeacher(UserRequestDTO userRequestDTO){
+    public void save(UserRequestDTO userRequestDTO){
 
         if(userRequestDTO.userType () == null){
             throw new IllegalArgumentException ("Requisição nula");
@@ -30,39 +31,24 @@ public class TeacherService {
             throw new IllegalArgumentException ("No momento, apenas professores podem criar contas");
         }
 
-        TeacherEntity newTeacherEntity = new TeacherEntity();
-        newTeacherEntity.setFirstName (userRequestDTO.firstName ());
-        newTeacherEntity.setLastName (userRequestDTO.lastName ());
-        newTeacherEntity.setEmail (userRequestDTO.email ());
-        newTeacherEntity.setPassword (userRequestDTO.password ());
-        newTeacherEntity.setUserType (userRequestDTO.userType ());
+        UserMapper entity = new UserMapper ();
+        teacherRepository.save (entity.toEntity(userRequestDTO));
 
-        teacherRepository.save (newTeacherEntity);
+        entity.toResponseDTO (entity.toEntity (userRequestDTO));
 
-        UserResponseDTO userResponseDTO = new UserResponseDTO(
-                newTeacherEntity.getFirstName(),
-                newTeacherEntity.getEmail (),
-                newTeacherEntity.getUserType ()
-        );
-
-        return ResponseEntity.ok (userResponseDTO);
     }
 
-    public ResponseEntity<UserResponseDTO> getUser (Long id){
+    public UserResponseDTO findById (Long id){
 
         TeacherEntity teacherEntity = teacherRepository.findById(id)
                 .orElseThrow (() -> new RuntimeException ("Usuário não encontrado!"));
 
-        UserResponseDTO userResponseDTO = new UserResponseDTO(
-                teacherEntity.getFirstName(),
-                teacherEntity.getEmail (),
-                teacherEntity.getUserType ()
-        );
+        UserMapper userMapper = new UserMapper ();
 
-        return ResponseEntity.ok (userResponseDTO);
+        return userMapper.toResponseDTO(teacherEntity);
     }
 
-    public ResponseEntity<UserResponseDTO> updateTeacher(UserRequestDTO userRequestDTO, Long id){
+    public void updateTeacher(UserRequestDTO userRequestDTO, Long id){
 
         TeacherEntity teacherEntity = teacherRepository.findById(id)
                 .orElseThrow (() -> new RuntimeException ("Usuário não encontrado"));
@@ -80,34 +66,29 @@ public class TeacherService {
             teacherEntity.setPassword (userRequestDTO.password ());
         }
 
-        UserResponseDTO userResponseDTO = new UserResponseDTO(
-                teacherEntity.getFirstName(),
-                teacherEntity.getEmail (),
-                teacherEntity.getUserType ()
-        );
+        UserMapper userMapper = new UserMapper ();
 
-        return ResponseEntity.ok (userResponseDTO);
+        userMapper.toResponseDTO (teacherEntity);
 
     }
 
-    public ResponseEntity<List<EmailResponseDTO>> getAllEmails(){
+    public List<EmailResponseDTO> getAllEmails(){
 
         List<TeacherEntity> teachers = teacherRepository.findAll ();
         List<EmailResponseDTO> listEmails = teachers.stream ()
                 .map (email -> new EmailResponseDTO (email.getEmail ()))
                 .toList ();
 
-        return ResponseEntity.ok (listEmails);
+        return listEmails;
     }
 
-    public ResponseEntity<Void> deleteTeacher(Long id){
+    public void deleteTeacher(Long id){
 
         if(!teacherRepository.existsById(id)){
-            return ResponseEntity.notFound().build();
+            throw new RuntimeException ("Usuário não encontrado");
         }
 
         teacherRepository.deleteById(id);
-        return ResponseEntity.ok().build ();
     }
 
 }
