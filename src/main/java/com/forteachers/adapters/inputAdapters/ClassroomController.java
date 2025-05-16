@@ -1,8 +1,8 @@
-package com.ForTeachers.adapters.inputAdapters;
+package com.forteachers.adapters.inputAdapters;
 
-import com.ForTeachers.dtos.classroomDTO.ClassroomRequestDTO;
-import com.ForTeachers.dtos.classroomDTO.ClassroomResponseDTO;
-import com.ForTeachers.services.ClassroomService;
+import com.forteachers.dtos.classroomDto.ClassroomRequestDTO;
+import com.forteachers.dtos.classroomDto.ClassroomResponseDTO;
+import com.forteachers.services.ClassroomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
