@@ -40,4 +40,20 @@ public class DisciplineEntity {
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private Set<StudentEntity> studentsList;
+
+    public void addStudent(StudentEntity entity){
+        studentsList.add(entity);
+    }
+
+    public void removeStudent(StudentEntity student){
+        studentsList.remove(student);
+    }
+
+    public void addLesson(LessonEntity lesson){
+        lessonList.add(lesson);
+    }
+
+    public void removeLesson(LessonEntity lesson){
+        lessonList.remove(lesson);
+    }
 }
