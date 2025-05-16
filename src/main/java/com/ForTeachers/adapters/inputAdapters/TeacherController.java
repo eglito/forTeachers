@@ -1,8 +1,8 @@
 package com.ForTeachers.adapters.inputAdapters;
 
 import com.ForTeachers.dtos.EmailResponseDTO;
-import com.ForTeachers.dtos.UserRequestDTO;
-import com.ForTeachers.dtos.UserResponseDTO;
+import com.ForTeachers.dtos.userDto.UserRequestDTO;
+import com.ForTeachers.dtos.userDto.UserResponseDTO;
 import com.ForTeachers.services.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +17,20 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/teachers")
-public class UserController {
+public class TeacherController {
 
     @Autowired
     private TeacherService service;
 
-    @PostMapping("/new_user")
-    public ResponseEntity<Void> createTeacher(@RequestBody UserRequestDTO userRequestDTO){
-        service.creatTeacher(userRequestDTO);
+    @PostMapping("/create")
+    public ResponseEntity<Void> save(@RequestBody UserRequestDTO userRequestDTO){
+        service.save (userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserResponseDTO> getTeacherForId(@PathVariable Long id){
-        return ResponseEntity.ok(service.getUser(id).getBody ());
+    @GetMapping("/find/{id}")
+    public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById (id));
     }
 
     @PatchMapping("/update/{id}")
@@ -47,7 +47,7 @@ public class UserController {
 
     @GetMapping("/emails")
     public ResponseEntity<List<EmailResponseDTO>> getAllTeachersEmails(){
-        return ResponseEntity.ok(service.getAllEmails().getBody());
+        return ResponseEntity.ok(service.getAllEmails());
     }
 
 }
