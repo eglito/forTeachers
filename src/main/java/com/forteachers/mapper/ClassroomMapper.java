@@ -1,8 +1,8 @@
-package com.ForTeachers.mapper;
+package com.forteachers.mapper;
 
-import com.ForTeachers.adapters.outputAdapters.ClassroomEntity;
-import com.ForTeachers.dtos.classroomDTO.ClassroomRequestDTO;
-import com.ForTeachers.dtos.classroomDTO.ClassroomResponseDTO;
+import com.forteachers.adapters.outputAdapters.ClassroomEntity;
+import com.forteachers.dtos.classroomDto.ClassroomRequestDTO;
+import com.forteachers.dtos.classroomDto.ClassroomResponseDTO;
 
 public class ClassroomMapper {
 
