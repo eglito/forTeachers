@@ -1,4 +1,4 @@
-package com.ForTeachers.dtos;
+package com.ForTeachers.dtos.userDto;
 
 import com.ForTeachers.enums.UserType;
 
