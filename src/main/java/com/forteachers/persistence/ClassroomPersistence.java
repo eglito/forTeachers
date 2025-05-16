@@ -1,7 +1,7 @@
-package com.ForTeachers.persistence;
+package com.forteachers.persistence;
 
-import com.ForTeachers.dtos.classroomDTO.ClassroomRequestDTO;
-import com.ForTeachers.dtos.classroomDTO.ClassroomResponseDTO;
+import com.forteachers.dtos.classroomDto.ClassroomRequestDTO;
+import com.forteachers.dtos.classroomDto.ClassroomResponseDTO;
 
 public interface ClassroomPersistence {
 
