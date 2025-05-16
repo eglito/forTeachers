@@ -21,7 +21,7 @@ public class LessonEntity {
     private Long id;
 
     @Column(length = 50)
-    private String classTitle;
+    private String lessonTitle;
     private String activity;
 
     @ManyToOne (fetch = FetchType.LAZY)
@@ -37,5 +37,15 @@ public class LessonEntity {
             joinColumns = @JoinColumn(name = "lesson_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    private Set<StudentEntity> studentsList;
+    private Set<StudentEntity> listStudent;
+
+    public void addStudent(StudentEntity student){
+        listStudent.add(student);
+        student.addLesson(this);
+    }
+
+    public void removeStudent(StudentEntity student){
+        listStudent.remove (student);
+        student.removeLesson(this);
+    }
 }
