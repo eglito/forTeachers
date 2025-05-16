@@ -1,4 +1,4 @@
-package com.ForTeachers.config;
+package com.forteachers.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
