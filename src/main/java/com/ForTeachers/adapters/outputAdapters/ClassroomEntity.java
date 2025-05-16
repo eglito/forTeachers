@@ -38,4 +38,13 @@ public class ClassroomEntity {
     )
     private Set<StudentEntity> studentsList;
 
+    public void addStudent(StudentEntity student){
+        studentsList.add (student);
+        student.addClassroom(this);
+    }
+
+    public void removeStudent(StudentEntity student){
+        studentsList.remove (student);
+        student.removeClassroom(this);
+    }
 }
