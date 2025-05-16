@@ -1,13 +1,13 @@
-package com.ForTeachers.services;
+package com.forteachers.services;
 
-import com.ForTeachers.adapters.outputAdapters.ClassroomEntity;
-import com.ForTeachers.adapters.outputAdapters.TeacherEntity;
-import com.ForTeachers.dtos.classroomDTO.ClassroomRequestDTO;
-import com.ForTeachers.dtos.classroomDTO.ClassroomResponseDTO;
-import com.ForTeachers.mapper.ClassroomMapper;
-import com.ForTeachers.persistence.ClassroomPersistence;
-import com.ForTeachers.repositorios.ClassroomRepository;
-import com.ForTeachers.repositorios.TeacherRepository;
+import com.forteachers.adapters.outputAdapters.ClassroomEntity;
+import com.forteachers.adapters.outputAdapters.TeacherEntity;
+import com.forteachers.dtos.classroomDto.ClassroomRequestDTO;
+import com.forteachers.dtos.classroomDto.ClassroomResponseDTO;
+import com.forteachers.mapper.ClassroomMapper;
+import com.forteachers.persistence.ClassroomPersistence;
+import com.forteachers.repositories.ClassroomRepository;
+import com.forteachers.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
