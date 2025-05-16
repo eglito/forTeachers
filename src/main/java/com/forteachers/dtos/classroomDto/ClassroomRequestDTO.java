@@ -1,4 +1,4 @@
-package com.ForTeachers.dtos.classroomDTO;
+package com.forteachers.dtos.classroomDto;
 
 public record ClassroomRequestDTO(
         String name
