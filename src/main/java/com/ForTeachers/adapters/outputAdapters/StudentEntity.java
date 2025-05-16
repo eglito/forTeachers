@@ -26,7 +26,37 @@ public class StudentEntity extends UserEntity{
     @ManyToMany(mappedBy = "studentsList")
     private Set<ClassroomEntity> classroomList;
 
-    @ManyToMany(mappedBy = "studentsList")
+    @ManyToMany(mappedBy = "listStudent")
     private Set<LessonEntity> lessonList;
+
+    public void addDiscipline(DisciplineEntity discipline){
+        disciplineList.add (discipline);
+        discipline.addStudent (this);
+    }
+
+    public void removeDiscipline(DisciplineEntity discipline){
+        disciplineList.remove (discipline);
+        discipline.removeStudent (this);
+    }
+
+    public void addClassroom(ClassroomEntity classroom){
+        classroomList.add (classroom);
+        classroom.addStudent (this);
+    }
+
+    public void removeClassroom(ClassroomEntity classroom){
+        classroomList.remove (classroom);
+        classroom.removeStudent (this);
+    }
+
+    public void addLesson(LessonEntity lesson){
+        lessonList.add(lesson);
+        lesson.addStudent(this);
+    }
+
+    public void removeLesson(LessonEntity lesson){
+        lessonList.remove (lesson);
+        lesson.removeStudent(this);
+    }
 
 }
