@@ -19,12 +19,7 @@ public class LessonMapper {
     }
 
     public LessonResponseDTO toResponse (LessonEntity entity){
-
-        LessonResponseDTO responseDTO = new LessonResponseDTO(
-                entity.getLessonTitle ()
-        );
-
-        return responseDTO;
+        return new LessonResponseDTO(entity.getLessonTitle ());
 
     }
 
