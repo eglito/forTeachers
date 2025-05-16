@@ -1,4 +1,4 @@
-package com.ForTeachers.adapters.outputAdapters;
+package com.forteachers.adapters.outputAdapters;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
