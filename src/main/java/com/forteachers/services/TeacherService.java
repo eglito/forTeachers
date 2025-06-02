@@ -1,6 +1,6 @@
 package com.forteachers.services;
 
-import com.forteachers.mapper.UserMapper;
+import com.forteachers.mapper.TeacherMapper;
 import com.forteachers.persistence.TeacherPersistence;
 import com.forteachers.adapters.outputAdapters.TeacherEntity;
 import com.forteachers.dtos.EmailResponseDTO;
@@ -18,13 +18,15 @@ public class TeacherService implements TeacherPersistence {
 
     @Autowired
     private final TeacherRepository teacherRepository;
+    private PasswordBcrypt passwordBcrypt;
 
-    public TeacherService(TeacherRepository teacherRepository) {
+    public TeacherService(TeacherRepository teacherRepository, PasswordBcrypt passwordBcrypt) {
         this.teacherRepository = teacherRepository;
+        this.passwordBcrypt = passwordBcrypt;
     }
 
 
-    public void save(UserRequestDTO userRequestDTO){
+    public UserResponseDTO save(UserRequestDTO userRequestDTO) throws IllegalAccessException {
 
         if(userRequestDTO.userType () == null){
             throw new IllegalArgumentException ("Requisição nula");
@@ -32,11 +34,11 @@ public class TeacherService implements TeacherPersistence {
             throw new IllegalArgumentException ("No momento, apenas professores podem criar contas");
         }
 
-        UserMapper entity = new UserMapper ();
+        TeacherEntity teacherEntity = new TeacherMapper().toEntity(userRequestDTO);
+        teacherEntity.setPassword(passwordBcrypt.hashing(userRequestDTO.password()));
+        teacherRepository.save(teacherEntity);
 
-        teacherRepository.save(entity.toEntity(userRequestDTO));
-
-        entity.toResponseDTO (entity.toEntity (userRequestDTO));
+        return new TeacherMapper().toResponseDTO(teacherEntity);
 
     }
 
@@ -45,9 +47,9 @@ public class TeacherService implements TeacherPersistence {
         TeacherEntity teacherEntity = teacherRepository.findById(id)
                 .orElseThrow (() -> new RuntimeException ("Usuário não encontrado!"));
 
-        UserMapper userMapper = new UserMapper ();
+        TeacherMapper teacherMapper = new TeacherMapper();
 
-        return userMapper.toResponseDTO(teacherEntity);
+        return teacherMapper.toResponseDTO(teacherEntity);
     }
 
     public void updateTeacher(UserRequestDTO userRequestDTO, Long id){
@@ -68,9 +70,9 @@ public class TeacherService implements TeacherPersistence {
             teacherEntity.setPassword (userRequestDTO.password ());
         }
 
-        UserMapper userMapper = new UserMapper ();
+        TeacherMapper teacherMapper = new TeacherMapper();
 
-        userMapper.toResponseDTO (teacherEntity);
+        teacherMapper.toResponseDTO (teacherEntity);
 
     }
 
