@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TeacherPersistence {
 
-    void save (UserRequestDTO userRequestDTO);
+    UserResponseDTO save (UserRequestDTO userRequestDTO) throws IllegalAccessException;
     UserResponseDTO findById (Long id);
     void updateTeacher(UserRequestDTO userRequestDTO, Long id);
     List<EmailResponseDTO> getAllEmails();
