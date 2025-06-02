@@ -2,7 +2,6 @@ package com.forteachers;
 
 import com.forteachers.adapters.outputAdapters.ClassroomEntity;
 import com.forteachers.adapters.outputAdapters.TeacherEntity;
-import com.forteachers.adapters.outputAdapters.UserEntity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
