@@ -1,11 +1,13 @@
 package com.forteachers.adapters.outputAdapters;
 
+import com.forteachers.InvitationToken;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -37,6 +39,9 @@ public class ClassroomEntity {
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private Set<StudentEntity> studentsList;
+
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<InvitationToken> invitationTokens = new HashSet<> ();
 
     public void addStudent(StudentEntity student){
         studentsList.add (student);
