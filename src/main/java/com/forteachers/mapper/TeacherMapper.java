@@ -5,9 +5,9 @@ import com.forteachers.adapters.outputAdapters.UserEntity;
 import com.forteachers.dtos.userDto.UserRequestDTO;
 import com.forteachers.dtos.userDto.UserResponseDTO;
 
-public class UserMapper {
+public class TeacherMapper {
 
-    public UserMapper() {
+    public TeacherMapper() {
     }
 
     public TeacherEntity toEntity (UserRequestDTO dto){
@@ -17,7 +17,6 @@ public class UserMapper {
             entity.setLastName (dto.lastName ());
             entity.setEmail (dto.email ());
             entity.setUserType (dto.userType ());
-            entity.setPassword (dto.password ());
 
         return entity;
     }
