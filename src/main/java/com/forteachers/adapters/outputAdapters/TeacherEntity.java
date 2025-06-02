@@ -1,5 +1,6 @@
 package com.forteachers.adapters.outputAdapters;
 
+import com.forteachers.InvitationToken;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class TeacherEntity extends UserEntity{
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LessonEntity> listLesson;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InvitationToken> listToken;
 
 
     public void addStudent(StudentEntity student){
