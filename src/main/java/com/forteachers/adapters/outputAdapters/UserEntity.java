@@ -11,8 +11,8 @@ import lombok.Setter;
 @Table (name = "users")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class UserEntity {
 
@@ -33,5 +33,8 @@ public abstract class UserEntity {
     private UserType userType;
 
     private String password;
+
+    @Column(name = "enabled")
+    private boolean enabled = false;
 
 }
