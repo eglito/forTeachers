@@ -16,12 +16,13 @@ import java.util.List;
 @Service
 public class TeacherService implements TeacherPersistence {
 
+    @Autowired
     private final TeacherRepository teacherRepository;
 
-    @Autowired
-    public TeacherService(TeacherRepository teacherRepository){
+    public TeacherService(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }
+
 
     public void save(UserRequestDTO userRequestDTO){
 
@@ -32,7 +33,8 @@ public class TeacherService implements TeacherPersistence {
         }
 
         UserMapper entity = new UserMapper ();
-        teacherRepository.save (entity.toEntity(userRequestDTO));
+
+        teacherRepository.save(entity.toEntity(userRequestDTO));
 
         entity.toResponseDTO (entity.toEntity (userRequestDTO));
 
