@@ -29,7 +29,7 @@ public class TeacherController {
     @Tag(name = "createTeacher")
     @PostMapping("/create")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true)
-    public ResponseEntity<Void> save(@RequestBody UserRequestDTO userRequestDTO) throws IllegalAccessException {
+    public ResponseEntity<UserResponseDTO> save(@RequestBody UserRequestDTO userRequestDTO) throws IllegalAccessException {
         service.save (userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -39,7 +39,7 @@ public class TeacherController {
         return ResponseEntity.ok(service.findById (id));
     }
 
-    @PatchMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void> updateTeacher(@RequestBody UserRequestDTO userRequestDTO, @PathVariable Long id){
         service.updateTeacher(userRequestDTO, id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
