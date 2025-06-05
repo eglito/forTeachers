@@ -1,8 +1,8 @@
 package com.forteachers.adapters.inputAdapters;
 
 import com.forteachers.dtos.EmailResponseDTO;
-import com.forteachers.dtos.userDto.UserRequestDTO;
-import com.forteachers.dtos.userDto.UserResponseDTO;
+import com.forteachers.dtos.teacherDto.TeacherRequestDTO;
+import com.forteachers.dtos.teacherDto.TeacherResponseDTO;
 import com.forteachers.services.TeacherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -29,19 +29,19 @@ public class TeacherController {
     @Tag(name = "createTeacher")
     @PostMapping("/create")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true)
-    public ResponseEntity<UserResponseDTO> save(@RequestBody UserRequestDTO userRequestDTO) throws IllegalAccessException {
-        service.save (userRequestDTO);
+    public ResponseEntity<TeacherResponseDTO> save(@RequestBody TeacherRequestDTO teacherRequestDTO) throws IllegalAccessException {
+        service.save (teacherRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id){
+    public ResponseEntity<TeacherResponseDTO> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById (id));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateTeacher(@RequestBody UserRequestDTO userRequestDTO, @PathVariable Long id){
-        service.updateTeacher(userRequestDTO, id);
+    public ResponseEntity<Void> updateTeacher(@RequestBody TeacherRequestDTO teacherRequestDTO, @PathVariable Long id){
+        service.updateTeacher(teacherRequestDTO, id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
