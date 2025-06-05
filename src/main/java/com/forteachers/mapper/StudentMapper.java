@@ -2,15 +2,15 @@ package com.forteachers.mapper;
 
 import com.forteachers.adapters.outputAdapters.StudentEntity;
 import com.forteachers.adapters.outputAdapters.UserEntity;
-import com.forteachers.dtos.userDto.UserRequestDTO;
-import com.forteachers.dtos.userDto.UserResponseDTO;
+import com.forteachers.dtos.studentDto.StudentRequestDTO;
+import com.forteachers.dtos.studentDto.StudentResponseDTO;
 
 public class StudentMapper {
 
     public StudentMapper() {
     }
 
-    public StudentEntity toEntity (UserRequestDTO dto){
+    public StudentEntity toEntity (StudentRequestDTO dto){
 
         StudentEntity entity = new StudentEntity();
         entity.setFirstName (dto.firstName ());
@@ -21,9 +21,9 @@ public class StudentMapper {
         return entity;
     }
 
-    public UserResponseDTO toResponseDTO(UserEntity entity){
+    public StudentResponseDTO toResponseDTO(UserEntity entity){
 
-        UserResponseDTO responseDTO = new UserResponseDTO (
+        StudentResponseDTO responseDTO = new StudentResponseDTO (
                 entity.getFirstName (),
                 entity.getEmail (),
                 entity.getUserType ()
