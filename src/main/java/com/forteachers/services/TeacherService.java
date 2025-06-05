@@ -1,13 +1,13 @@
 package com.forteachers.services;
 
-import com.forteachers.InvitationToken;
+import com.forteachers.adapters.outputAdapters.InvitationToken;
 import com.forteachers.adapters.outputAdapters.ClassroomEntity;
 import com.forteachers.mapper.TeacherMapper;
 import com.forteachers.persistence.TeacherPersistence;
 import com.forteachers.adapters.outputAdapters.TeacherEntity;
 import com.forteachers.dtos.EmailResponseDTO;
-import com.forteachers.dtos.userDto.UserResponseDTO;
-import com.forteachers.dtos.userDto.UserRequestDTO;
+import com.forteachers.dtos.teacherDto.TeacherResponseDTO;
+import com.forteachers.dtos.teacherDto.TeacherRequestDTO;
 import com.forteachers.enums.UserType;
 import com.forteachers.repositories.ClassroomRepository;
 import com.forteachers.repositories.TeacherRepository;
@@ -36,23 +36,23 @@ public class TeacherService implements TeacherPersistence {
     }
 
 
-    public UserResponseDTO save(UserRequestDTO userRequestDTO) throws IllegalAccessException {
+    public TeacherResponseDTO save(TeacherRequestDTO teacherRequestDTO) throws IllegalAccessException {
 
-        if(userRequestDTO.userType () == null){
+        if(teacherRequestDTO.userType () == null){
             throw new IllegalArgumentException ("Requisição nula");
-        } else if (userRequestDTO.userType () == UserType.STUDENT) {
+        } else if (teacherRequestDTO.userType () == UserType.STUDENT) {
             throw new IllegalArgumentException ("No momento, apenas professores podem criar contas");
         }
 
-        TeacherEntity teacherEntity = new TeacherMapper().toEntity(userRequestDTO);
-        teacherEntity.setPassword(passwordBcrypt.hashing(userRequestDTO.password()));
+        TeacherEntity teacherEntity = new TeacherMapper().toEntity(teacherRequestDTO);
+        teacherEntity.setPassword(passwordBcrypt.hashing(teacherRequestDTO.password()));
         teacherRepository.save(teacherEntity);
 
         return new TeacherMapper().toResponseDTO(teacherEntity);
 
     }
 
-    public UserResponseDTO findById (Long id){
+    public TeacherResponseDTO findById (Long id){
 
         TeacherEntity teacherEntity = teacherRepository.findById(id)
                 .orElseThrow (() -> new RuntimeException ("Usuário não encontrado!"));
@@ -62,22 +62,22 @@ public class TeacherService implements TeacherPersistence {
         return teacherMapper.toResponseDTO(teacherEntity);
     }
 
-    public void updateTeacher(UserRequestDTO userRequestDTO, Long id){
+    public void updateTeacher(TeacherRequestDTO teacherRequestDTO, Long id){
 
         TeacherEntity teacherEntity = teacherRepository.findById(id)
                 .orElseThrow (() -> new RuntimeException ("Usuário não encontrado"));
 
-        if(!teacherEntity.getFirstName().equals(userRequestDTO.firstName ())){
-            teacherEntity.setFirstName(userRequestDTO.firstName ());
+        if(!teacherEntity.getFirstName().equals(teacherRequestDTO.firstName ())){
+            teacherEntity.setFirstName(teacherRequestDTO.firstName ());
         }
-        if(!teacherEntity.getLastName().equals(userRequestDTO.lastName())){
-            teacherEntity.setLastName(userRequestDTO.lastName ());
+        if(!teacherEntity.getLastName().equals(teacherRequestDTO.lastName())){
+            teacherEntity.setLastName(teacherRequestDTO.lastName ());
         }
-        if(!teacherEntity.getEmail ().equals(userRequestDTO.email ())){
-            teacherEntity.setEmail(userRequestDTO.email ());
+        if(!teacherEntity.getEmail ().equals(teacherRequestDTO.email ())){
+            teacherEntity.setEmail(teacherRequestDTO.email ());
         }
-        if(!teacherEntity.getPassword ().equals(userRequestDTO.password ())){
-            teacherEntity.setPassword (userRequestDTO.password ());
+        if(!teacherEntity.getPassword ().equals(teacherRequestDTO.password ())){
+            teacherEntity.setPassword (teacherRequestDTO.password ());
         }
 
         TeacherMapper teacherMapper = new TeacherMapper();
