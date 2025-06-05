@@ -1,6 +1,5 @@
 package com.forteachers.adapters.outputAdapters;
 
-import com.forteachers.InvitationToken;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
