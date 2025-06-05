@@ -1,7 +1,5 @@
-package com.forteachers;
+package com.forteachers.adapters.outputAdapters;
 
-import com.forteachers.adapters.outputAdapters.ClassroomEntity;
-import com.forteachers.adapters.outputAdapters.TeacherEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +15,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "invitationToken")
 public class InvitationToken {
-    private static final int EXPIRATION = 60 * 24;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
