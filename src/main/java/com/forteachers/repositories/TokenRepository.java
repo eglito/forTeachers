@@ -1,6 +1,6 @@
 package com.forteachers.repositories;
 
-import com.forteachers.InvitationToken;
+import com.forteachers.adapters.outputAdapters.InvitationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
