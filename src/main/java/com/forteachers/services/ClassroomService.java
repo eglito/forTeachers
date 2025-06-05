@@ -26,6 +26,7 @@ public class ClassroomService implements ClassroomPersistence {
 
         ClassroomMapper mapper = new ClassroomMapper ();
         ClassroomEntity classroomEntity =  mapper.toEntity (requestDTO);
+        classroomEntity.setTeacher (teacherEntity);
         classroomRepository.save (classroomEntity);
         teacherEntity.addClassroom (classroomEntity);
 
