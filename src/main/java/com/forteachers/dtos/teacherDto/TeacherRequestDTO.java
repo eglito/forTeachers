@@ -1,8 +1,8 @@
-package com.forteachers.dtos.userDto;
+package com.forteachers.dtos.teacherDto;
 
 import com.forteachers.enums.UserType;
 
-public record UserRequestDTO(
+public record TeacherRequestDTO(
         String firstName,
         String lastName,
         String email,
