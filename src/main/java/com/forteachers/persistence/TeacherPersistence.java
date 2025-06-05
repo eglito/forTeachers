@@ -1,16 +1,16 @@
 package com.forteachers.persistence;
 
 import com.forteachers.dtos.EmailResponseDTO;
-import com.forteachers.dtos.userDto.UserRequestDTO;
-import com.forteachers.dtos.userDto.UserResponseDTO;
+import com.forteachers.dtos.teacherDto.TeacherRequestDTO;
+import com.forteachers.dtos.teacherDto.TeacherResponseDTO;
 
 import java.util.List;
 
 public interface TeacherPersistence {
 
-    UserResponseDTO save (UserRequestDTO userRequestDTO) throws IllegalAccessException;
-    UserResponseDTO findById (Long id);
-    void updateTeacher(UserRequestDTO userRequestDTO, Long id);
+    TeacherResponseDTO save (TeacherRequestDTO teacherRequestDTO) throws IllegalAccessException;
+    TeacherResponseDTO findById (Long id);
+    void updateTeacher(TeacherRequestDTO teacherRequestDTO, Long id);
     List<EmailResponseDTO> getAllEmails();
     void deleteTeacher(Long id);
 }
